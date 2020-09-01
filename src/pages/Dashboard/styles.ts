@@ -13,6 +13,21 @@ export const Container = styled.div`
     max-width: 1200px;
 `;
 
+export const Header = styled.header`
+    display: flex;
+    align-items: center;
+
+    img{
+        width:100px;
+        height:100px;
+    }
+
+    span{
+        font-size: 40px;
+        margin-left: 10px;
+    }
+`;
+
 export const CardContainer = styled.div`
     display: flex;
     width: 100%;

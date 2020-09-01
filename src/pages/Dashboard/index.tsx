@@ -1,22 +1,28 @@
 import React from 'react';
-import { Container, CardContainer, Card, DetailsContainer, Details, AddDetailButton } from './styles';
+import { Container, CardContainer, Card, DetailsContainer, Details, AddDetailButton, Header } from './styles';
+import logo from '../../assets/logo.svg';
 import { FiTrash, FiPlus } from 'react-icons/fi';
+import { useFinances } from '../../context/FinancesContext';
 
 const Dashboard: React.FC = () => {
+    const { total, gastos, ganhos, create } = useFinances();
     return (
         <Container>
+            <Header>
+                <img src={logo} alt="MyFinances" /> <span>MyFinances</span>
+            </Header>
             <CardContainer>
                 <Card>
                     <h1>Ganhos</h1>
-                    <span>R$ 2000,00</span>
+                    <span>R$ {ganhos}</span>
                 </Card>
                 <Card isNegative>
-                    <h1>Perdas</h1>
-                    <span>R$ 1000,00</span>
+                    <h1>Gastos</h1>
+                    <span>R$ {gastos}</span>
                 </Card>
                 <Card>
                     <h1>Total</h1>
-                    <span>R$ 1000,00</span>
+                    <span>R$ {total}</span>
                 </Card>
             </CardContainer>
             <DetailsContainer>
