@@ -16,6 +16,7 @@ interface FinancesContextData {
     ganhos: number;
     data: Item[];
     create(item: Item): void;
+    deleteItem(itemId: string): void;
 }
 
 const FinancesContext = createContext<FinancesContextData>({} as FinancesContextData);
@@ -30,6 +31,15 @@ const FinancesProvider: React.FC = ({ children }) => {
 
         return [];
     });
+
+    const deleteItem = useCallback((itemId: string) => {
+        const newData = data.filter((item) => item.id !== itemId);
+
+        localStorage.setItem('@MyFinances:data', JSON.stringify(newData));
+
+        setData(newData);
+    }, [data]);
+
 
     const create = useCallback(({ name, categorie, type, date, value }: Item) => {
         const newData = [...data, { id: uuid(), name, categorie, type, date, value }];
@@ -67,7 +77,7 @@ const FinancesProvider: React.FC = ({ children }) => {
     }, [ganhos, gastos]);
 
     return (
-        <FinancesContext.Provider value={{ total, ganhos, gastos, data: data, create }}>
+        <FinancesContext.Provider value={{ total, ganhos, gastos, data: data, create, deleteItem }}>
             {children}
         </FinancesContext.Provider>
     );

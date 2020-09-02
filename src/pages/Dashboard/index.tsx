@@ -15,8 +15,8 @@ interface Item {
 }
 
 const Dashboard: React.FC = () => {
-    const { total, gastos, ganhos, data, create } = useFinances();
-    const [isAddingNewItem, setIsAddingNewItem] = useState(true);
+    const { total, gastos, ganhos, data, create, deleteItem } = useFinances();
+    const [isAddingNewItem, setIsAddingNewItem] = useState(false);
     const [formData, setFormData] = useState({ name: '', categorie: '', date: new Date(), type: 'Ganho', value: 0, id: '' } as Item);
 
     const handleCreateItem = useCallback(() => {
@@ -71,7 +71,7 @@ const Dashboard: React.FC = () => {
                             <span>{item.date}</span>
                             <span>R$ {item.value}</span>
                         </div>
-                        <button>
+                        <button onClick={() => deleteItem(item.id)}>
                             <FiTrash size={20} />
                         </button>
                     </Details>
