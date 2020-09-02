@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useState, useMemo, useContext } from 'react';
+import { uuid } from 'uuidv4';
 
 interface Item {
     id: string;
@@ -14,13 +15,7 @@ interface FinancesContextData {
     gastos: number;
     ganhos: number;
     data: Item[];
-    create(item: Item): Promise<void>;
-}
-
-interface FinancesState {
-    gastos: number;
-    ganhos: number;
-    data: Item[];
+    create(item: Item): void;
 }
 
 const FinancesContext = createContext<FinancesContextData>({} as FinancesContextData);
@@ -36,9 +31,13 @@ const FinancesProvider: React.FC = ({ children }) => {
         return [];
     });
 
-    const create = useCallback(async ({ name, type, date, value }) => {
-        console.log({ name, type, date, value });
-    }, []);
+    const create = useCallback(({ name, categorie, type, date, value }: Item) => {
+        const newData = [...data, { id: uuid(), name, categorie, type, date, value }];
+
+        localStorage.setItem('@MyFinances:data', JSON.stringify(newData));
+
+        setData(newData);
+    }, [data]);
 
     const ganhos = useMemo(() => {
         const filterGanhos = data.reduce((accumulator, item) => {
@@ -65,7 +64,7 @@ const FinancesProvider: React.FC = ({ children }) => {
 
     const total = useMemo(() => {
         return ganhos - gastos;
-    }, [data]);
+    }, [ganhos, gastos]);
 
     return (
         <FinancesContext.Provider value={{ total, ganhos, gastos, data: data, create }}>

@@ -11,6 +11,7 @@ export const Container = styled.div`
     margin: 0 auto;
     width: 100%;
     max-width: 1200px;
+    padding: 20px;
 `;
 
 export const Header = styled.header`
@@ -67,6 +68,8 @@ export const DetailsContainer = styled.div`
     flex: 1;
     flex-direction: column;
     width: 100%;
+
+    
 `;
 
 
@@ -76,8 +79,8 @@ export const Details = styled.div<CardProps>`
     width: 100%;
     background: #201a38;
     padding: 20px;
-
-    & + &{
+    
+    & + div{
         margin-top: 10px;
     }
 
@@ -106,6 +109,63 @@ export const Details = styled.div<CardProps>`
         color: #8c8c8c;
 
         &:hover{
+            color: #ff2b2b;
+            transition: color 0.5s;
+        }
+    }
+
+`;
+
+
+export const DetailsForm = styled.form`
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #201a38;
+    padding: 20px;
+    margin-top: 10px;
+
+    div{
+        flex: 1;
+        display: flex;
+        border-radius: 5px;
+        align-items: center;
+        justify-content: space-between;
+
+        select{
+            background: transparent;
+            padding: 10px;
+            border: 1px solid #009c72;
+            border-radius: 5px;
+        }
+        
+        input{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-wrap: break-word;
+            max-width: 200px;
+            font-size: 20px;
+            background: transparent;
+            border: 1px solid #009c72;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    }
+
+    button{
+        max-height: 20px;
+        background: transparent;
+        border: 0px;
+        color: #8c8c8c;
+        margin-left: 20px;
+
+        &:hover{
+            color: #00ff44;
+            transition: color 0.5s;
+        }
+
+        & + button:hover{
             color: #ff2b2b;
             transition: color 0.5s;
         }
