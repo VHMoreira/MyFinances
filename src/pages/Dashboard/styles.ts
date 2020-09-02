@@ -11,12 +11,19 @@ export const Container = styled.div`
     margin: 0 auto;
     width: 100%;
     max-width: 1200px;
-    padding: 20px;
+
+    @media only screen and (max-width:700px){
+        max-width: 100%;
+
+        overflow-x: hidden;
+    }
 `;
 
 export const Header = styled.header`
     display: flex;
     align-items: center;
+    max-width: 100%;
+    padding: 20px;
 
     img{
         width:100px;
@@ -31,14 +38,19 @@ export const Header = styled.header`
 
 export const CardContainer = styled.div`
     display: flex;
-    width: 100%;
     margin: 50px 0;
+    padding: 20px;
+
+    @media only screen and (max-width:700px){
+        flex-direction: column;
+    }
 `;
 
 export const Card = styled.div<CardProps>`
     display: flex;
-    flex: 1;
     flex-direction: column;
+
+    width: 100%;
 
     background: #201a38;
     padding: 20px;
@@ -60,6 +72,15 @@ export const Card = styled.div<CardProps>`
         color: ${props => props.isNegative ? '#ff2b2b' : '#00ff44'};
     }
 
+    @media only screen and (max-width:700px){
+        width: 100%;
+
+        & + & {
+            margin-top: 10px;
+            margin-left: 0;
+        }
+    }
+
 `;
 
 
@@ -67,8 +88,8 @@ export const DetailsContainer = styled.div`
     display: flex;
     flex: 1;
     flex-direction: column;
-    width: 100%;
-
+    max-width: 1200;
+    margin: 0 20px;
     
 `;
 
@@ -99,6 +120,12 @@ export const Details = styled.div<CardProps>`
             max-width: 200px;
             font-size: 20px;
             color: ${props => props.isNegative ? '#ff2b2b' : '#00ff44'};
+        }
+
+        @media only screen and (max-width:700px){
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 20px;
         }
     }
 
@@ -151,6 +178,15 @@ export const DetailsForm = styled.form`
             border-radius: 5px;
             padding: 10px;
         }
+
+        @media only screen and (max-width:700px){
+            display: grid;
+            grid-template: "
+                select input input
+                select input input
+            ";
+            row-gap: 20px;
+        }
     }
 
     button{
@@ -175,6 +211,8 @@ export const DetailsForm = styled.form`
 
 export const AddDetailButton = styled.button`
     margin-top: 20px;
+    max-width: 1200;
+    margin: 20px 20px;
     background: transparent;
     border-radius: 5px;
     border: 1px solid #009c72;
